@@ -24,6 +24,17 @@ function App() {
     setToys((currentToys) => [...currentToys, newToy]);
   }
 
+  // Delete a toy from the backend and then remove it from the page.
+  function handleDonate(toyId) {
+    fetch(`http://localhost:6001/toys/${toyId}`, {
+      method: "DELETE",
+    }).then(() => {
+      setToys((currentToys) =>
+        currentToys.filter((toy) => toy.id !== toyId)
+      );
+    });
+  }
+
   return (
     <>
       <Header />
@@ -34,7 +45,7 @@ function App() {
         <button onClick={handleClick}>Add a Toy</button>
       </div>
 
-      <ToyContainer toys={toys} />
+      <ToyContainer toys={toys} onDonate={handleDonate} />
     </>
   );
 }
