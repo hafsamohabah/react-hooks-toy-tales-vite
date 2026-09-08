@@ -1,7 +1,12 @@
 import React from "react";
 
-function ToyCard({ toy, onDonate }) {
-  // Display the details for the toy received from the parent component.
+function ToyCard({ toy, onDonate, onLike }) {
+  // Tell App which toy was liked.
+  function handleLike() {
+    onLike(toy);
+  }
+
+  // Tell App which toy should be donated.
   function handleDonate() {
     onDonate(toy.id);
   }
@@ -18,7 +23,9 @@ function ToyCard({ toy, onDonate }) {
 
       <p>{toy.likes} Likes </p>
 
-      <button className="like-btn">Like {"<3"}</button>
+      <button className="like-btn" onClick={handleLike}>
+        Like {"<3"}
+      </button>
 
       <button className="del-btn" onClick={handleDonate}>
         Donate to GoodWill
