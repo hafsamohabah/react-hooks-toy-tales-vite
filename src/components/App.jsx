@@ -35,6 +35,29 @@ function App() {
     });
   }
 
+  // Increase a toy's likes in the backend and update it in the same position.
+  function handleLike(toy) {
+    const updatedLikes = toy.likes + 1;
+
+    fetch(`http://localhost:6001/toys/${toy.id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        likes: updatedLikes,
+      }),
+    })
+      .then((response) => response.json())
+      .then((updatedToy) => {
+        setToys((currentToys) =>
+          currentToys.map((currentToy) =>
+            currentToy.id === updatedToy.id ? updatedToy : currentToy
+          )
+        );
+      });
+  }
+
   return (
     <>
       <Header />
@@ -45,7 +68,11 @@ function App() {
         <button onClick={handleClick}>Add a Toy</button>
       </div>
 
-      <ToyContainer toys={toys} onDonate={handleDonate} />
+      <ToyContainer
+        toys={toys}
+        onDonate={handleDonate}
+        onLike={handleLike}
+      />
     </>
   );
 }
