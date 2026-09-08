@@ -14,7 +14,7 @@ function ToyForm({ onToyAdded }) {
     };
 
     // Send the new toy to the backend.
-    fetch("http://localhost:6001/toys", {
+    fetch("http://localhost:3001/toys", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

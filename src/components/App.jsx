@@ -10,7 +10,7 @@ function App() {
 
   // Fetch all toys when the app first loads.
   useEffect(() => {
-    fetch("http://localhost:6001/toys")
+    fetch("http://localhost:3001/toys")
       .then((response) => response.json())
       .then((data) => setToys(data));
   }, []);
@@ -26,7 +26,7 @@ function App() {
 
   // Delete a toy from the backend and then remove it from the page.
   function handleDonate(toyId) {
-    fetch(`http://localhost:6001/toys/${toyId}`, {
+    fetch(`http://localhost:3001/toys/${toyId}`, {
       method: "DELETE",
     }).then(() => {
       setToys((currentToys) =>
@@ -39,7 +39,7 @@ function App() {
   function handleLike(toy) {
     const updatedLikes = toy.likes + 1;
 
-    fetch(`http://localhost:6001/toys/${toy.id}`, {
+    fetch(`http://localhost:3001/toys/${toy.id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
